@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:fragment="header (title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title th:text="${label}">My Blog</title>
+</head>
+<body th:fragment="navbar">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="navbar-collapse collapse mr-auto">
+        <a class="navbar-brand" th:href="@{/posts}">My Super Blog</a>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2 ">
+        <span sec:authorize="isAuthenticated()" th:text="${#authentication.getPrincipal().getUsername()}" class="navbar-text my-2 my-lg-0"></span>
+        <span sec:authorize="hasRole('ROLE_ADMIN')" class="navbar-text"> (admin)</span>
+
+        <a sec:authorize="isAnonymous()" class="btn btn-success mr-auto" th:href="@{/login}" role="button">Log in</a>
+        <a sec:authorize="isAuthenticated()" class="btn btn-danger" th:href="@{/logout}" role="button">Log out</a>
+    </div>
+</nav>
+</body>
+</html>
+
