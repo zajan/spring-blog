@@ -17,7 +17,18 @@ public class BlogController {
 
     @GetMapping("/posts")
     public String posts(Model model, Principal principal, HttpServletRequest request) {
-        model.addAttribute("posts", postService.findAll());
+        int page = 0;
+        int size = 5;
+
+        if (request.getParameter("page") != null && !request.getParameter("page").isEmpty()) {
+            page = Integer.parseInt(request.getParameter("page")) - 1;
+        }
+
+        if (request.getParameter("size") != null && !request.getParameter("size").isEmpty()) {
+            size = Integer.parseInt(request.getParameter("size"));
+        }
+
+        model.addAttribute("posts", postService.findAll(page, size));
         return "posts";
     }
 }
