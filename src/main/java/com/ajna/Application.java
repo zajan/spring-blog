@@ -62,6 +62,19 @@ public class Application {
         if(userService.findByUsername(admin.getUsername()) == null){
             userService.save(admin);
         }
-        
+
+
+        if(postService.findAll().size() == 0){
+            Post post;
+            for(int i =0; i<6; i++){
+                post = new Post();
+                post.setTitle("My sample post nr " + i);
+                post.setBody("This is the body of my sample post nr " + i);
+                post.setUser(admin);
+
+                postService.save(post);
+            }
+        }
+
     }
 }
