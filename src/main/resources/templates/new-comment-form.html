@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="~{fragments/general :: header ('Hello!')}">
+</head>
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+<div class="container">
+    <h3>Add comment</h3>
+    <hr>
+    <h2 th:text="${comment.post.title}"></h2>
+    <form action="#" th:action="@{/save-comment(postId=${comment.post.id})}"
+          th:object="${comment}" method="POST">
+        <textarea th:field="*{body}"
+                  class="form-control mb-4" rows="2" placeholder="Your comment.."></textarea>
+        <button type="submit" class="btn btn-info col-2">Save</button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
 
 <head th:replace="~{fragments/general :: header ('Hello!')}">
 </head>
@@ -7,6 +8,7 @@
 <body>
 <div th:replace="fragments/general :: navbar"></div>
 
+<!---- POST ---->
 <div class="container">
     <a th:href="@{/posts}"> < Back to all posts</a>
     <h1 th:text="${post.title}" class="mt-5"></h1>
@@ -15,6 +17,28 @@
         <small th:text="${post.user.username}"></small>
     </p>
     <p th:text="${post.body}" class="mb-5"></p>
+</div>
+
+<!----- COMMENTS ---->
+<hr>
+<div class="container">
+    <h3>Comments</h3>
+    <div class="container">
+        <a sec:authorize="isAuthenticated()" th:href="@{/new-comment(postId=${post.id})}"
+           class="btn btn-info btn-sm mb-3">
+            Add Comment
+        </a>
+        <p sec:authorize="isAnonymous()"><a th:href="@{/new-comment(postId=${post.id})}">Log in</a> to add comments</p>
+    </div>
+
+    <div th:each="comment : ${post.comments}" class="mx-2">
+        <p class="font-weight-bold" th:text="${comment.user.username}"></p>
+        <p>
+            <small th:text="${comment.createDate}"></small>
+        </p>
+        <p th:text="${comment.body}">Body </p>
+        <hr>
+    </div>
 </div>
 
 </body>

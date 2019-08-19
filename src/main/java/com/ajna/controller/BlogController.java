@@ -1,6 +1,8 @@
 package com.ajna.controller;
 
+import com.ajna.model.Comment;
 import com.ajna.model.Post;
+import com.ajna.service.CommentService;
 import com.ajna.service.CustomUserDetailsService;
 import com.ajna.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +24,9 @@ public class BlogController {
 
     @Autowired
     CustomUserDetailsService userService;
+
+    @Autowired
+    CommentService commentService;
 
     @GetMapping("/")
     public String home(){
@@ -69,5 +74,23 @@ public class BlogController {
     public String showPost(@RequestParam("id")long id, Model model){
         model.addAttribute("post",postService.findById(id));
         return "post";
+    }
+
+    @GetMapping("/new-comment")
+    public String newComment(@RequestParam("postId")long postId,Model model) {
+        Comment comment = new Comment();
+        comment.setPost(postService.findById(postId));
+        model.addAttribute("comment",comment);
+        return "new-comment-form";
+    }
+
+    @PostMapping("/save-comment")
+    public String saveComment(@ModelAttribute("comment") Comment comment,@RequestParam("postId")long postId, Principal principal){
+        if (principal != null) {
+            comment.setUser(userService.findByUsername(principal.getName()));
+        }
+        comment.setPost(postService.findById(postId));
+        commentService.save(comment);
+        return "redirect:/post" +"?id=" + comment.getPost().getId();
     }
 }
