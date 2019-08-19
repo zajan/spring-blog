@@ -2,6 +2,14 @@
 Spring Boot blog app
 ## About
 This is a simple blogging application.
+![alt text](pics/1.png)
+![alt text](pics/2.png)
+![alt text](pics/3.png)
+
+The security configuration:
+- everybody can view the posts and comments
+- authenticated users (with ROLE_USER and ROLE_ADMIN) can add comments
+- only users with ROLE_ADMIN can add posts
 ## Technologies used
 Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Thymeleaf.
 It is connecting to a MySQL Database.
