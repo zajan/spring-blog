@@ -22,6 +22,11 @@ public class BlogController {
     @Autowired
     CustomUserDetailsService userService;
 
+    @GetMapping("/")
+    public String home(){
+        return "redirect:/posts";
+    }
+
     @GetMapping("/posts")
     public String posts(Model model, Principal principal, HttpServletRequest request) {
         int page = 0;
