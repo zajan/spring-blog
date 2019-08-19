@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="~{fragments/general :: header ('Hello!')}">
+</head>
+
+<body>
+<div th:replace="fragments/general :: navbar"></div>
+
+<div class="container">
+    <a th:href="@{/posts}"> < Back to all posts</a>
+    <h1 th:text="${post.title}" class="mt-5"></h1>
+    <p class="my-2 font-weight-bold">
+        <small>Author:</small>
+        <small th:text="${post.user.username}"></small>
+    </p>
+    <p th:text="${post.body}" class="mb-5"></p>
+</div>
+
+</body>
+
+</html>

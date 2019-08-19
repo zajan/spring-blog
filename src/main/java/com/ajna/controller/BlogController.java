@@ -65,5 +65,9 @@ public class BlogController {
         postService.save(post);
         return "redirect:/posts";
     }
-    
+    @GetMapping("/post")
+    public String showPost(@RequestParam("id")long id, Model model){
+        model.addAttribute("post",postService.findById(id));
+        return "post";
+    }
 }
