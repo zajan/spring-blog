@@ -11,18 +11,9 @@ The security configuration:
 - authenticated users (with ROLE_USER and ROLE_ADMIN) can add comments
 - only users with ROLE_ADMIN can add posts
 ## Technologies used
-Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Thymeleaf.
-It is connecting to a MySQL Database.
+Spring Boot, Spring MVC, Spring Security, Spring Data JPA, Hibernate, Thymeleaf, H2 db.
 ## How to run
-To run the app make sure your username and password to access MySQL db are matching with application.properties file. 
-You also need to have a database created with name matching the configuration. 
-There is no need to create specific tables because Hibernate will do it automatically.
 
-```
-spring.datasource.url=jdbc:mysql://localhost:3306/blog2?useSSL=false&serverTimezone=UTC
-spring.datasource.username=root
-spring.datasource.password=root
-```
 on windows:
 ```
 mvnw spring-boot:run
@@ -30,4 +21,16 @@ mvnw spring-boot:run
 on mac:
 ```
 ./mvnw spring-boot:run
+```
+
+
+**This app is using lightweight, embedded database H2.**
+
+**Alternatively**, there is a version of the app using MySQL db on the mysql-db-version. To run the app make sure your username and password to access MySQL db are matching with application.properties file. 
+You also need to have a database created with name matching the configuration. 
+There is no need to create specific tables because Hibernate will do it automatically.
+```
+spring.datasource.url=jdbc:mysql://localhost:3306/blog2?useSSL=false&serverTimezone=UTC
+spring.datasource.username=root
+spring.datasource.password=root
 ```
