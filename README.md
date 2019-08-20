@@ -23,3 +23,11 @@ spring.datasource.url=jdbc:mysql://localhost:3306/blog2?useSSL=false&serverTimez
 spring.datasource.username=root
 spring.datasource.password=root
 ```
+on windows:
+```
+mvnw spring-boot:run
+```
+on mac:
+```
+./mvnw spring-boot:run
+```
